@@ -18,4 +18,4 @@ Commands:
 > 
 > `/ac usage` **»** Show the usage.
 
-
+**Download:** https://drive.google.com/file/d/1J9L3FYBQ_IuiQbA3q97gW6pCsH8G_JO1/view?usp=sharing
