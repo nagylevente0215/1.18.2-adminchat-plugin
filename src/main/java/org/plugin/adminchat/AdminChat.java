@@ -15,6 +15,7 @@ public final class AdminChat extends JavaPlugin {
 
     public final Logger logger = Logger.getLogger("minecraft");
 
+    // Define prefixes/messages. It'll modife to the config.yml version.
     public static String ac = "§c§lADMINCHAT>> ";
     public static String acPrefix = "§8[§4ADMINCHAT§8] ";
     public static String nameColor = "§c"; //& is requid
@@ -22,7 +23,7 @@ public final class AdminChat extends JavaPlugin {
     public static String invalidUsage = "§cPlease provide a message!";
     public static String usage = "§6Usage: §a/ac <message>"; //It is behind ac string
     public static String helpBorder = "§b+-------------------------+";
-    public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage."; //§4§l»
+    public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage.";
     public static String helpUsage = "§b/ac <message> §4» §aSend a message to the admin chat.";
     public static ArrayList<String> help = new ArrayList<>();
 
@@ -87,11 +88,7 @@ public final class AdminChat extends JavaPlugin {
             }
 
             if (args[0].equals("help")) {
-                //help.forEach(s -> sender.sendMessage(s));
-                sender.sendMessage(helpBorder);
-                sender.sendMessage(helpUsageCommand);
-                sender.sendMessage(helpUsage);
-                sender.sendMessage(helpBorder);
+                help.forEach(s -> sender.sendMessage(s));
                 return true;
             }
 
