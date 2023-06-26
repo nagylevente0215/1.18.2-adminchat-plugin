@@ -11,4 +11,9 @@
 > - /helpop
 > ```
 
-The message is **visible** for the **sender** and for **players who has ac** permission.
+The message is **visible** for the **sender** and for **players who has *ac*** permission.
+
+Commands:
+> `/ac help` **»** Show the help menu.
+> 
+> `/ac usage` **»** Show the usage.
