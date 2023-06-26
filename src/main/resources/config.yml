@@ -1,5 +1,5 @@
 #Use § instead of & for write with colors
-acPrefix: "§8[§4ADMINCHAT§8]" #This is how it will be in the chat/in the console: [ADMINCHAT] (with colors)
+acPrefix: "§8[§4ADMINCHAT§8] " #This is how it will be in the chat/in the console: [ADMINCHAT] (with colors)
 #With this prefix: /ac a -> [ADMINCHAT] {your name|console}: a
 
 ac: "§c§lADMINCHAT>> "         #This is the prefix of the improper usage.
