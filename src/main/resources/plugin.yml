@@ -1,0 +1,13 @@
+name: AdminChat
+version: '${project.version}'
+main: org.plugin.adminchat.AdminChat
+api-version: 1.18
+author: nl
+commands:
+  ac:
+    description: Admin chat
+    aliases:
+      - adminchat
+      - ac
+      - helpop
+      - ho
