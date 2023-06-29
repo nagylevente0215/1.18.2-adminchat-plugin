@@ -26,8 +26,10 @@ public final class AdminChat extends JavaPlugin {
     public static String permissionMessage = "§cYou have no permission to use this command!";
     public static boolean nonStaffUsage = true;
     public static String separator = " : ";
+    public static String reloadSuccessfully = "§5Reload successfully!";
     public static String helpBorder = "§b+-------------------------+";
     public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage."; //§4§l»
+    public static String helpReloadCommand = "§b/ac reload §4» §aReload §6config.yml §avalues";
     public static String helpUsage = "§b/ac <message> §4» §aSend a message to the admin chat.";
     public static ArrayList<String> help = new ArrayList<>();
 
@@ -51,12 +53,15 @@ public final class AdminChat extends JavaPlugin {
         permission = config.getString("permission");
         nonStaffUsage = config.getBoolean("nonStaffUsage");
         permissionMessage = config.getString("permissionMessage");
+        reloadSuccessfully = config.getString("reloadSuccessfully");
         helpBorder = config.getString("help.border");
         helpUsageCommand = config.getString("help.usageCommand");
         helpUsage = config.getString("help.usage");
 
+        help = new ArrayList<>();
         help.add(helpBorder);
         help.add(helpUsageCommand);
+        help.add(helpReloadCommand);
         help.add(helpUsage);
         help.add(helpBorder);
     }
@@ -78,6 +83,13 @@ public final class AdminChat extends JavaPlugin {
         helpBorder = config.getString("help.border");
         helpUsageCommand = config.getString("help.usageCommand");
         helpUsage = config.getString("help.usage");
+
+        help = new ArrayList<>();
+        help.add(helpBorder);
+        help.add(helpUsageCommand);
+        help.add(helpReloadCommand);
+        help.add(helpUsage);
+        help.add(helpBorder);
     }
 
     @Override
@@ -90,17 +102,27 @@ public final class AdminChat extends JavaPlugin {
                 return true;
             }
 
-            if (args[0].equals("usage")) {
+            if (args[0].equalsIgnoreCase("usage")) {
                 sender.sendMessage(ac + usage);
                 return true;
             }
 
-            if (args[0].equals("help")) {
-                //help.forEach(s -> sender.sendMessage(s));
-                sender.sendMessage(helpBorder);
-                sender.sendMessage(helpUsageCommand);
-                sender.sendMessage(helpUsage);
-                sender.sendMessage(helpBorder);
+            if (args[0].equalsIgnoreCase("help")) {
+                help.forEach(s -> sender.sendMessage(s));
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("reload")) {
+                if (sender instanceof Player) {
+                    player = (Player) sender;
+                    if (player.hasPermission("ac.reload") || player.hasPermission("ac.*")) {
+                        reloadConfigValues(sender);
+                        return true;
+                    } else {
+                        player.sendMessage(ac + "You have no permission to do this!");
+                    }
+                }
+                reloadConfigValues(sender);
                 return true;
             }
 
@@ -149,5 +171,33 @@ public final class AdminChat extends JavaPlugin {
         }
 
         return true;
+    }
+
+    public void reloadConfigValues(CommandSender sender) {
+        saveDefaultConfig();
+        reloadConfig();
+
+        FileConfiguration config = getConfig();
+
+        ac = config.getString("ac");
+        acPrefix = config.getString("acPrefix");
+        nameColor = config.getString("nameColor");
+        textColor = config.getString("textColor");
+        separator = config.getString("textSeparator");
+        permission = config.getString("permission");
+        nonStaffUsage = config.getBoolean("nonStaffUsage");
+        permissionMessage = config.getString("permissionMessage");
+        helpBorder = config.getString("help.border");
+        helpUsageCommand = config.getString("help.usageCommand");
+        helpUsage = config.getString("help.usage");
+
+        help = new ArrayList<>();
+        help.add(helpBorder);
+        help.add(helpUsageCommand);
+        help.add(helpReloadCommand);
+        help.add(helpUsage);
+        help.add(helpBorder);
+
+        sender.sendMessage( ac + reloadSuccessfully);
     }
 }
