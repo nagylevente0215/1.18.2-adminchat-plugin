@@ -8,8 +8,14 @@ ac: "§c§lADMINCHAT>> "         #This is the prefix of the improper usage.
 nameColor: "§c "              #This is the color of your name in the adminchat
 #If you set it to §c§l then your name is bold red (&c&l) in the adminchat
 
-textColor: ": §e"                #This is the color of text name in the adminchat
+textColor: "§e"                #This is the color of text name in the adminchat
 #If you set it to §e then your text is yellow (&e) in the adminchat
+
+textSeparator: " : " #It is between the player's name and the textColor, spaces are required!
+
+permission: "ac" #This permission will require to see messages
+nonStaffUsage: true #If it is true, players can use this command without permission
+permissionMessage: "§cYou have no permission to use this command!"
 
 invalidUsage: "§cPlease provide a message!"
 

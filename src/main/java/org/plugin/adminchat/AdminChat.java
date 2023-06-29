@@ -15,15 +15,19 @@ public final class AdminChat extends JavaPlugin {
 
     public final Logger logger = Logger.getLogger("minecraft");
 
-    // Define prefixes/messages. It'll modife to the config.yml version.
+    //define default values
     public static String ac = "§c§lADMINCHAT>> ";
     public static String acPrefix = "§8[§4ADMINCHAT§8] ";
     public static String nameColor = "§c"; //& is requid
     public static String textColor = ":§e "; //& is requid
     public static String invalidUsage = "§cPlease provide a message!";
     public static String usage = "§6Usage: §a/ac <message>"; //It is behind ac string
+    public static String permission = "ac";
+    public static String permissionMessage = "§cYou have no permission to use this command!";
+    public static boolean nonStaffUsage = true;
+    public static String separator = " : ";
     public static String helpBorder = "§b+-------------------------+";
-    public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage.";
+    public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage."; //§4§l»
     public static String helpUsage = "§b/ac <message> §4» §aSend a message to the admin chat.";
     public static ArrayList<String> help = new ArrayList<>();
 
@@ -43,6 +47,10 @@ public final class AdminChat extends JavaPlugin {
         acPrefix = config.getString("acPrefix");
         nameColor = config.getString("nameColor");
         textColor = config.getString("textColor");
+        separator = config.getString("textSeparator");
+        permission = config.getString("permission");
+        nonStaffUsage = config.getBoolean("nonStaffUsage");
+        permissionMessage = config.getString("permissionMessage");
         helpBorder = config.getString("help.border");
         helpUsageCommand = config.getString("help.usageCommand");
         helpUsage = config.getString("help.usage");
@@ -88,22 +96,42 @@ public final class AdminChat extends JavaPlugin {
             }
 
             if (args[0].equals("help")) {
-                help.forEach(s -> sender.sendMessage(s));
+                //help.forEach(s -> sender.sendMessage(s));
+                sender.sendMessage(helpBorder);
+                sender.sendMessage(helpUsageCommand);
+                sender.sendMessage(helpUsage);
+                sender.sendMessage(helpBorder);
                 return true;
             }
 
             if (sender instanceof Player) {
                 player = (Player) sender;
                 String message = ChatColor.translateAlternateColorCodes('&', String.join(" ", args));
-                if (!player.hasPermission("ac")) {
-                    player.sendMessage(acPrefix + nameColor + player.getName() + textColor + message);
-                }
-                Send send = () -> {
-                    for (Player recipient : getServer().getOnlinePlayers()) {
-                        if (recipient.hasPermission(ac)) recipient.sendMessage(acPrefix + nameColor + player.getDisplayName() + textColor + message);
+                if (nonStaffUsage) {
+                    if (player.hasPermission(permission)) {
+                        if (!player.hasPermission("ac")) {
+                            player.sendMessage(acPrefix + nameColor + player.getName() + separator + textColor + message);
+                        }
+                        Send send = () -> {
+                            for (Player recipient : getServer().getOnlinePlayers()) {
+                                if (recipient.hasPermission(ac)) recipient.sendMessage(acPrefix + nameColor + player.getDisplayName() + separator + textColor + message);
+                            }
+                        };
+                        send.send();
+                    } else {
+                        player.sendMessage(permissionMessage);
                     }
-                };
-                send.send();
+                } else {
+                    if (!player.hasPermission("ac")) {
+                        player.sendMessage(acPrefix + nameColor + player.getName() + separator + textColor + message);
+                    }
+                    Send send = () -> {
+                        for (Player recipient : getServer().getOnlinePlayers()) {
+                            if (recipient.hasPermission(ac)) recipient.sendMessage(acPrefix + nameColor + player.getDisplayName() + separator + textColor + message);
+                        }
+                    };
+                    send.send();
+                }
                 return true;
             }
 
@@ -112,10 +140,10 @@ public final class AdminChat extends JavaPlugin {
                 ((Send) () -> {
                     for (Player recipient : getServer().getOnlinePlayers()) {
                         if (recipient.hasPermission(ac))
-                            recipient.sendMessage(acPrefix + ChatColor.BLACK + "CONSOLE" + textColor + message);
+                            recipient.sendMessage(acPrefix + ChatColor.BLACK + "CONSOLE" + separator + textColor + message);
                     }
                 }).send();
-                sender.sendMessage(acPrefix + ChatColor.BLACK + "CONSOLE" + textColor + message);
+                sender.sendMessage(acPrefix + ChatColor.BLACK + "CONSOLE" + separator + textColor + message);
                 return true;
             }
         }
