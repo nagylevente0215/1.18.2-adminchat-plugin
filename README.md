@@ -12,6 +12,7 @@
 > ```
 
 The message is **visible** for the **sender** and for **players who has *ac*** permission. 
+You can configure this in **config.yml**. (you can disable non staff usage)
 You can configure messages/prefixes in **config.yml**.
 
 Commands:
@@ -21,4 +22,4 @@ Commands:
 >
 > `/ac reload` **»** Reload config.yml values.
 
-**Download:** https://drive.google.com/file/d/1J9L3FYBQ_IuiQbA3q97gW6pCsH8G_JO1/view?usp=sharing
+**Download:** https://github.com/nagylevente0215/1.18.2-adminchat-plugin/raw/main/target/original-AdminChat-1.0-SNAPSHOT.jar
