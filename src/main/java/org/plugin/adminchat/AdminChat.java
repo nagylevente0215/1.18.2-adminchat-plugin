@@ -27,6 +27,7 @@ public final class AdminChat extends JavaPlugin {
     public static boolean nonStaffUsage = true;
     public static String separator = " : ";
     public static String reloadSuccessfully = "§5Reload successfully!";
+    public static String reloadPermission = permission + "reload";
     public static String helpBorder = "§b+-------------------------+";
     public static String helpUsageCommand = "§b/ac usage §4» §aShow the usage."; //§4§l»
     public static String helpReloadCommand = "§b/ac reload §4» §aReload §6config.yml §avalues";
@@ -54,6 +55,7 @@ public final class AdminChat extends JavaPlugin {
         nonStaffUsage = config.getBoolean("nonStaffUsage");
         permissionMessage = config.getString("permissionMessage");
         reloadSuccessfully = config.getString("reloadSuccessfully");
+        reloadPermission = permission + "." + config.getString("reloadPermission");
         helpBorder = config.getString("help.border");
         helpUsageCommand = config.getString("help.usageCommand");
         helpUsage = config.getString("help.usage");
@@ -115,7 +117,7 @@ public final class AdminChat extends JavaPlugin {
             if (args[0].equalsIgnoreCase("reload")) {
                 if (sender instanceof Player) {
                     player = (Player) sender;
-                    if (player.hasPermission("ac.reload") || player.hasPermission("ac.*")) {
+                    if (player.hasPermission(reloadPermission) || player.hasPermission("ac.*")) {
                         reloadConfigValues(sender);
                         return true;
                     } else {

@@ -20,6 +20,8 @@ permissionMessage: "§cYou have no permission to use this command!"
 invalidUsage: "§cPlease provide a message!"
 reloadSuccessfully: "§5Reload successfully"
 
+reloadPermission: "reload" #This permission will set to permission.reloadPermission
+
 #Help menu config
 help:
   border: "§b+-------------------------+"
