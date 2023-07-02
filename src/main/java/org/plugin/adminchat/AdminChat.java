@@ -25,7 +25,7 @@ public final class AdminChat extends JavaPlugin {
     public static String permission = "ac";
     public static String permissionMessage = "§cYou have no permission to use this command!";
     public static boolean nonStaffUsage = true;
-    public static String separator = " : ";
+    public static String separator = ": ";
     public static String reloadSuccessfully = "§5Reload successfully!";
     public static String reloadPermission = permission + "reload";
     public static String helpBorder = "§b+-------------------------+";
