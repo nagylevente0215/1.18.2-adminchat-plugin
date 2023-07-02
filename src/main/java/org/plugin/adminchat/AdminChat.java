@@ -18,8 +18,8 @@ public final class AdminChat extends JavaPlugin {
     //define default values
     public static String ac = "§c§lADMINCHAT>> ";
     public static String acPrefix = "§8[§4ADMINCHAT§8] ";
-    public static String nameColor = "§c"; //& is requid
-    public static String textColor = ":§e "; //& is requid
+    public static String nameColor = "§c"; //§ is requid
+    public static String textColor = ":§e "; //§ is requid
     public static String invalidUsage = "§cPlease provide a message!";
     public static String usage = "§6Usage: §a/ac <message>"; //It is behind ac string
     public static String permission = "ac";
