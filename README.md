@@ -22,4 +22,4 @@ Commands:
 >
 > `/ac reload` **»** Reload config.yml values.
 
-**Download:** https://github.com/nagylevente0215/1.18.2-adminchat-plugin/raw/main/target/original-AdminChat-1.0-SNAPSHOT.jar
+**Download:** https://github.com/nagylevente0215/1.18.2-adminchat-plugin/raw/main/target/AdminChat-1.0-RELEASE.jar
