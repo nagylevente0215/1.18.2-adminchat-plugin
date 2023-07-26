@@ -12,7 +12,7 @@
 > ```
 
 The message is **visible** for the **sender** and for **players who has *ac*** permission. 
-You can configure this in **config.yml**. (you can disable non staff usage)
+You can configure it in **config.yml**. (you can disable non staff usage)
 You can configure messages/prefixes in **config.yml**.
 
 Commands:
